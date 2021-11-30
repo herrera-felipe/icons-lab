@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 import com.alkemy.icons.dto.IconBasicDTO;
 import com.alkemy.icons.dto.IconDTO;
 import com.alkemy.icons.dto.PaisDTO;
-import com.alkemy.icons.entity.ContinenteEntity;
 import com.alkemy.icons.entity.IconEntity;
 
 @Component
@@ -38,7 +36,7 @@ public class IconMapper {
 	}
 
 
-	private IconDTO iconEntity2DTO(IconEntity entity, boolean loadPaises) {
+	public IconDTO iconEntity2DTO(IconEntity entity, boolean loadPaises) {
 
 		IconDTO dto = new IconDTO();
 		// Seteamos los valores del entity al dto
@@ -71,7 +69,7 @@ public class IconMapper {
 	/*
 	 * Actualizacion de datos de un dto a la entidad
 	 */
-	public void iconEntityRefreshValues(IconEntity entity, IconDTO dto) {
+	public void iconEntityUpdate(IconEntity entity, IconDTO dto) {
 		entity.setImagen(dto.getImagen());
 		entity.setDenominacion(dto.getDenominacion());
 		entity.setFechaCreacion(this.string2LocalDate(dto.getFechaCreacion()));

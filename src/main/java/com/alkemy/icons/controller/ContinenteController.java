@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alkemy.icons.dto.ContinenteDTO;
 import com.alkemy.icons.service.ContinenteService;
-import com.alkemy.icons.service.impl.ContinenteServiceImpl;
 
 @RestController
 @RequestMapping("continentes") // Url /continentes

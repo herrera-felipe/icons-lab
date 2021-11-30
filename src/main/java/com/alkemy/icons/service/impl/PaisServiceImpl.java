@@ -23,14 +23,19 @@ public class PaisServiceImpl implements PaisService {
 	public PaisDTO save(PaisDTO dto) {
 		PaisEntity entity = paisMapper.paisDTO2Entity(dto); // parseo a entidad para persistir
 		PaisEntity entitySaved = paisRepository.save(entity); // persistimos a bd
-		PaisDTO result = paisMapper.paisEntity2DTO(entitySaved); // parseo a dto para return
+		PaisDTO result = paisMapper.paisEntity2DTO(entitySaved, false); // parseo a dto para return
 		return result; // retornamos el dto
 	}
 
 	public List<PaisDTO> getAllPaises() {
 		List<PaisEntity> entities = paisRepository.findAll(); // consulta a la db y almacenamos en una lista
-		List<PaisDTO> result = paisMapper.paisEntityList2DTOList(entities);
+		List<PaisDTO> result = paisMapper.paisEntityList2DTOList(entities, false);
 		return result;
+	}
+
+	public PaisEntity getEntityById(Long idPais) {
+		PaisEntity entity = this.paisRepository.getById(idPais);
+		return entity;
 	}
 
 }

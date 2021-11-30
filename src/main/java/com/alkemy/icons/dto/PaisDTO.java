@@ -15,5 +15,5 @@ public class PaisDTO {
 		private Long cantidadHabitantes;
 		private Long superficie;
 		private Long continenteId;
-//		private List<IconDTO> icons;
+		private List<IconDTO> icons;
 }

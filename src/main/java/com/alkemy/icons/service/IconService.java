@@ -2,13 +2,14 @@ package com.alkemy.icons.service;
 
 import java.util.List;
 
+import com.alkemy.icons.dto.IconBasicDTO;
 import com.alkemy.icons.dto.IconDTO;
 
 public interface IconService {
 
 	public IconDTO save(IconDTO dto);
 	
-	public List<IconDTO> getAllIcons();
+	public List<IconBasicDTO> getAllIcons();
 	
 	public IconDTO getDetailsById(Long id);
 

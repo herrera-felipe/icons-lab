@@ -26,11 +26,11 @@ public class IconController {
 	private IconService iconService;
 	
 	
-//	@GetMapping("/all")
-//	public ResponseEntity<List<IconBasicDTO>> getAll() {
-//		List<IconBasicDTO> icons = this.iconService.getAllIcons();
-//		return ResponseEntity.ok(icons);
-//	}
+	@GetMapping("/all")
+	public ResponseEntity<List<IconBasicDTO>> getAll() {
+		List<IconBasicDTO> icons = this.iconService.getAllIcons();
+		return ResponseEntity.ok(icons);
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<IconDTO> getDetailsById(@PathVariable Long id) {

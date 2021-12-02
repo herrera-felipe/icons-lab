@@ -2,16 +2,19 @@ package com.alkemy.icons.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alkemy.icons.dto.IconBasicDTO;
 import com.alkemy.icons.dto.IconDTO;
+import com.alkemy.icons.dto.IconFiltersDTO;
 import com.alkemy.icons.entity.IconEntity;
 import com.alkemy.icons.entity.PaisEntity;
 import com.alkemy.icons.mapper.IconMapper;
 import com.alkemy.icons.repository.IconRepository;
+import com.alkemy.icons.repository.specifications.IconSpecification;
 import com.alkemy.icons.service.IconService;
 import com.alkemy.icons.service.PaisService;
 
@@ -25,12 +28,15 @@ public class IconServiceImpl implements IconService {
 	
 	@Autowired
 	private PaisService paisService;
+	
+	@Autowired
+	private IconSpecification iconSpecification;
 
 	
 	public IconDTO save(IconDTO dto) {
 		IconEntity entity = this.iconMapper.iconDTO2Entity(dto); // convertir el dto a entidad
 		IconEntity entitySaved = this.iconRepository.save(entity); // Peristir a la bd con el repository
-		IconDTO result = this.iconMapper.iconEntity2DTO(entitySaved, false); // convertir el entity a dto para retornar 
+		IconDTO result = this.iconMapper.iconEntity2DTO(entitySaved, true); // convertir el entity a dto para retornar 
 		return result;
 	}
 
@@ -97,6 +103,21 @@ public class IconServiceImpl implements IconService {
 		entity.removePais(paisEntity); // Eliminamos el pais
 		
 		this.iconRepository.save(entity); // Actualizamos datos
+	}
+
+
+	/*
+	 * Busqueda por filtro
+	 */
+	public List<IconDTO> getByFilters(String nombre, String fechaCreacion, Set<Long> paises, String orden) {
+		IconFiltersDTO filtersDTO = new IconFiltersDTO(nombre, fechaCreacion, paises, orden);
+		
+		// Buscamos segun parametros, con el metodo getByFilters de iconSpecification
+		List<IconEntity> entities = this.iconRepository.findAll(this.iconSpecification.getByFilters(filtersDTO));
+		
+		List<IconDTO> iconDTOs = this.iconMapper.iconEntitySet2DTOList(entities, true);
+		
+		return iconDTOs;
 	}
 
 }

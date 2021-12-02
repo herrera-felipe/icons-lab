@@ -1,6 +1,7 @@
 package com.alkemy.icons.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.alkemy.icons.dto.IconBasicDTO;
 import com.alkemy.icons.dto.IconDTO;
@@ -20,4 +21,6 @@ public interface IconService {
 	public void addPais(Long id, Long idPais);
 
 	public void removePais(Long id, Long idPais);
+
+	public List<IconDTO> getByFilters(String nombre, String fechaCreacion, Set<Long> paises, String orden);
 }

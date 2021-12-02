@@ -20,6 +20,9 @@ public class IconMapper {
 	@Autowired
 	private PaisMapper paisMapper;
 
+	/*
+	 * Transformacion de DTO a Entity
+	 */
 	public IconEntity iconDTO2Entity(IconDTO dto) {
 
 		IconEntity entity = new IconEntity(); // Intanciamos la entidad
@@ -35,7 +38,9 @@ public class IconMapper {
 		return entity;
 	}
 
-
+	/*
+	 * Transformacion de Entity a DTO
+	 */
 	public IconDTO iconEntity2DTO(IconEntity entity, boolean loadPaises) {
 
 		IconDTO dto = new IconDTO();
@@ -61,13 +66,15 @@ public class IconMapper {
 	 * formatea la fecha que viene en un string a LocalDate
 	 */
 	private LocalDate string2LocalDate(String stringDate) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate date = LocalDate.parse(stringDate, formatter);
         return date;
 	}
 	
 	/*
-	 * Actualizacion de datos de un dto a la entidad
+	 * Actualizacion de Entity:
+	 * 	* Recibe el DTO(Datos nuevos) y el Entity (a modificar)
+	 * 	* setea los valores del DTO al Entity.
 	 */
 	public void iconEntityUpdate(IconEntity entity, IconDTO dto) {
 		entity.setImagen(dto.getImagen());
